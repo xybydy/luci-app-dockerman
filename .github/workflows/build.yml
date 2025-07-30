@@ -3,6 +3,7 @@ on:
 #     Sequence of patterns matched against refs/tags
     tags:
     - '*' # Tag events
+  workflow_dispatch:
 
 name: Upload Release Asset
 
