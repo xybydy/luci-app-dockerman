@@ -1,77 +1,92 @@
+name: Build Packages
+
 on:
   push:
-#     Sequence of patterns matched against refs/tags
     tags:
-    - '*' # Tag events
-  workflow_dispatch:
+      - "*"
 
-name: Upload Release Asset
+workflow_dispatch:
 
 jobs:
   build:
-    name: Upload Release Asset
+    name: Build ${{ matrix.arch }}-${{ matrix.sdk }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch:
+          # - aarch64_cortex-a53
+          # - aarch64_cortex-a72
+          # - aarch64_cortex-a76
+          - aarch64_generic
+          # - arm_arm1176jzf-s_vfp
+          # - arm_arm926ej-s
+          # - arm_cortex-a15_neon-vfpv4
+          # - arm_cortex-a5_vfpv4
+          # - arm_cortex-a7
+          # - arm_cortex-a7_neon-vfpv4
+          # - arm_cortex-a7_vfpv4
+          # - arm_cortex-a8_vfpv3
+          # - arm_cortex-a9
+          # - arm_cortex-a9_neon
+          # - arm_cortex-a9_vfpv3-d16
+          # - arm_fa526
+          # - arm_xscale
+          # - i386_pentium-mmx
+          # - i386_pentium4
+          # - loongarch64_generic
+          # - mips64_mips64r2
+          # - mips64_octeonplus
+          # - mips64el_mips64r2
+          # - mips_24kc
+          # - mips_4kec
+          # - mips_mips32
+          # - mipsel_24kc
+          # - mipsel_24kc_24kf
+          # - mipsel_74kc
+          # - mipsel_mips32
+          # - riscv64_riscv64
+          # - x86_64
+        sdk:
+          - openwrt-24.10
+          # - SNAPSHOT
+
     steps:
-      - name: checkout codes
-        uses: actions/checkout@v1
-      - name: build
-        id: build_ipk
-        run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          echo ::set-output name=tag_name::${TAG}
-          mkdir -p /tmp/luci-app-dockerman/usr/lib/lua/luci /tmp/luci-app-dockerman/www/
-          [ -d $GITHUB_WORKSPACE/applications/luci-app-dockerman/luasrc ] && cp -R $GITHUB_WORKSPACE/applications/luci-app-dockerman/luasrc/* /tmp/luci-app-dockerman/usr/lib/lua/luci/
-          [ -d $GITHUB_WORKSPACE/applications/luci-app-dockerman/root ] && cp -R $GITHUB_WORKSPACE/applications/luci-app-dockerman/root/* /tmp/luci-app-dockerman/
-          chmod +x /tmp/luci-app-dockerman/etc/init.d/* >/dev/null 2>&1
-          chmod +x /tmp/luci-app-dockerman/etc/uci-defaults/* >/dev/null 2>&1
-          [ -d $GITHUB_WORKSPACE/applications/luci-app-dockerman/htdocs ] && cp -R $GITHUB_WORKSPACE/applications/luci-app-dockerman/htdocs/* /tmp/luci-app-dockerman/www/
-          [ -d $GITHUB_WORKSPACE/applications/luci-app-dockerman/po ] && sudo -E apt-get -y install gcc make && \
-          mkdir -p /tmp/po2lmo && mkdir -p /tmp/luci-app-dockerman/usr/lib/lua/luci/i18n/ && \
-          wget -O /tmp/po2lmo/po2lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/po2lmo.c && \
-          wget -O /tmp/po2lmo/Makefile https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/Makefile && \
-          wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/template_lmo.h && \
-          wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/template_lmo.c && \
-          cd /tmp/po2lmo && make po2lmo && ./po2lmo $GITHUB_WORKSPACE/applications/luci-app-dockerman/po/zh-cn/dockerman.po /tmp/luci-app-dockerman/usr/lib/lua/luci/i18n/dockerman.zh-cn.lmo
-          mkdir -p /tmp/luci-app-dockerman/CONTROL
-          cat >/tmp/luci-app-dockerman/CONTROL/control <<EOF
-          Package: luci-app-dockerman
-          Version: ${TAG}
-          Depends: luci-lib-docker, ttyd, docker, dockerd, luci-lib-ip
-          Architecture: all
-          Maintainer: xybydy<https://github.com/xybydy/luci-app-dockerman>
-          Section: luci
-          Priority: optional
-          Description: Simple Docker manager interface
-          Source: http://github.com/xybydy/luci-app-dockerman
-          EOF
-          cat >/tmp/luci-app-dockerman/CONTROL/postinst <<EOF
-          #!/bin/sh
-          if [ -z "${IPKG_INSTROOT}" ]; then
-          ( . /etc/uci-defaults/luci-app-dockerman ) && rm -f /etc/uci-defaults/luci-app-dockerman
-          fi
-          exit 0
-          EOF
-          chmod +x /tmp/luci-app-dockerman/CONTROL/postinst
-          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/openwrt-24.10/scripts/ipkg-build && \
-          chmod +x /tmp/ipkg-build && \
-          /tmp/ipkg-build -o root -g root /tmp/luci-app-dockerman /tmp
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
+          fetch-depth: 0
+
+      - name: Build Packages
+        uses: openwrt/openwrt-gh-action-sdk@main
+        env:
+          ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
+          #FEEDNAME: packages_ci
+          PACKAGES: luci-app-dockerman
+          NO_REFRESH_CHECK: true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.arch }}-${{ matrix.sdk }}
+          path: |
+            # bin/packages/${{ matrix.arch }}/packages_ci/*.apk
+            # bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
+
+            bin/packages/${{ matrix.arch }}/*.apk
+            bin/packages/${{ matrix.arch }}/*.ipk
+
+      # - name: Create compress files
+      #   continue-on-error: true
+      #   run: |
+      #     tar -zcvf ${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz -C bin/packages/${{ matrix.arch }}/ packages_ci
+
+      - name: Upload packages
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          replacesArtifacts: true
           prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: /tmp/luci-app-dockerman_${{ steps.build_ipk.outputs.tag_name }}_all.ipk
-          asset_name: luci-app-dockerman_${{ steps.build_ipk.outputs.tag_name }}_all.ipk
-          asset_content_type: application/octet-stream
+          artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.ipk"
+          # artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz"
