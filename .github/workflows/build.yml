@@ -29,8 +29,8 @@ jobs:
           mkdir -p /tmp/po2lmo && mkdir -p /tmp/luci-app-dockerman/usr/lib/lua/luci/i18n/ && \
           wget -O /tmp/po2lmo/po2lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/po2lmo.c && \
           wget -O /tmp/po2lmo/Makefile https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/Makefile && \
-          wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-24-10/modules/luci-base/src/template_lmo.h && \
-          wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-24-10/modules/luci-base/src/template_lmo.c && \
+          wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/template_lmo.h && \
+          wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-24.10/modules/luci-base/src/template_lmo.c && \
           cd /tmp/po2lmo && make po2lmo && ./po2lmo $GITHUB_WORKSPACE/applications/luci-app-dockerman/po/zh-cn/dockerman.po /tmp/luci-app-dockerman/usr/lib/lua/luci/i18n/dockerman.zh-cn.lmo
           mkdir -p /tmp/luci-app-dockerman/CONTROL
           cat >/tmp/luci-app-dockerman/CONTROL/control <<EOF
@@ -52,7 +52,7 @@ jobs:
           exit 0
           EOF
           chmod +x /tmp/luci-app-dockerman/CONTROL/postinst
-          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/openwrt-24-10/scripts/ipkg-build && \
+          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/openwrt-24.10/scripts/ipkg-build && \
           chmod +x /tmp/ipkg-build && \
           /tmp/ipkg-build -o root -g root /tmp/luci-app-dockerman /tmp
       - name: Create Release
