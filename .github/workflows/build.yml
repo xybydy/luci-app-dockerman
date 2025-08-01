@@ -60,7 +60,7 @@ jobs:
         
       # - uses: hmarr/debug-action@v3
       - name: Build Packages
-        uses: openwrt/gh-action-sdk@main
+        uses: aloisklink/gh-action-sdk@7be9a7838e0f8a99638eaf257c0322f97a7546c5
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
