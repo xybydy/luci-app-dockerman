@@ -62,8 +62,8 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
-          #FEEDNAME: packages_ci
-          # PACKAGES: luci-app-dockerman
+          FEEDNAME: packages_ci
+          PACKAGES: luci-app-dockerman
           NO_REFRESH_CHECK: true
           V: "sc"
 
@@ -75,8 +75,8 @@ jobs:
             # bin/packages/${{ matrix.arch }}/packages_ci/*.apk
             # bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
-            bin/packages/${{ matrix.arch }}/*.apk
-            bin/packages/${{ matrix.arch }}/*.ipk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.apk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
       # - name: Create compress files
       #   continue-on-error: true
