@@ -17,4 +17,4 @@ The result of using the command line
  - openwrt version:
  - luci version:
  - docker daemon version:
- - dockerman version:
+ - podmaner version:

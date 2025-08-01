@@ -1,0 +1,11 @@
+{
+	"luci-app-podmaner": {
+		"description": "Grant UCI access for luci-app-podmaner",
+		"read": {
+			"uci": [ "dockerd" ]
+			},
+		"write": {
+			"uci": [ "dockerd" ]
+		}
+	}
+}

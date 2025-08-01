@@ -1,16 +1,16 @@
-# Luci-app-dockerman
+# Luci-app-podmaner
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/lisaac/luci-app-dockerman?style=flat-square)](https://github.com/lisaac/luci-app-dockerman/releases)
-[![GitHub stars](https://img.shields.io/github/stars/lisaac/luci-app-dockerman?style=flat-square)](https://github.com/lisaac/luci-app-dockerman/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/lisaac/luci-app-dockerman?style=flat-square)](https://github.com/lisaac/luci-app-dockerman/network/members)
-[![License](https://img.shields.io/github/license/lisaac/luci-app-dockerman?style=flat-square)](https://github.com/lisaac/luci-app-dockerman/blob/master/LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/lisaac/luci-app-podmaner?style=flat-square)](https://github.com/lisaac/luci-app-podmaner/releases)
+[![GitHub stars](https://img.shields.io/github/stars/lisaac/luci-app-podmaner?style=flat-square)](https://github.com/lisaac/luci-app-podmaner/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/lisaac/luci-app-podmaner?style=flat-square)](https://github.com/lisaac/luci-app-podmaner/network/members)
+[![License](https://img.shields.io/github/license/lisaac/luci-app-podmaner?style=flat-square)](https://github.com/lisaac/luci-app-podmaner/blob/master/LICENSE)
 [![Telegram Group](https://img.shields.io/badge/telegam-group-_?style=flat-square)](https://t.me/joinchat/G5mqjhrlU9S8TMkXeBmj0w)
-<!-- ![GitHub All Releases](https://img.shields.io/github/downloads/lisaac/luci-app-dockerman/total?style=flat-square) -->
+<!-- ![GitHub All Releases](https://img.shields.io/github/downloads/lisaac/luci-app-podmaner/total?style=flat-square) -->
 
 ## Docker Manager for LuCI / 适用于 LuCI 的 Docker 管理插件
 - 一个用于管理 Docker 容器、镜像、网络、存储卷的 Openwrt 插件
 - 同时也适用于 [Openwrt-in-docker](https://github.com/lisaac/openwrt-in-docker) 或 [LuCI-in-docker](https://github.com/lisaac/luci-in-docker)
-- [Download / 下载 ipk](https://github.com/lisaac/luci-app-dockerman/releases)
+- [Download / 下载 ipk](https://github.com/lisaac/luci-app-podmaner/releases)
 
 ## Depends / 依赖
 - [luci-lib-docker](https://github.com/lisaac/luci-lib-docker)
@@ -24,35 +24,35 @@
 
 #compile package only
 make package/luci-lib-docker/compile v=99
-make package/luci-app-dockerman/compile v=99
+make package/luci-app-podmaner/compile v=99
 
 #compile
 make menuconfig
 #choose Utilities  ---> <*> docker....................................... Docker Community Edition
 #choose Kernel features for Docker which you want
-#choose LuCI ---> 3. Applications  ---> <*> luci-app-dockerman..... Docker Manager interface for LuCI ----> save
+#choose LuCI ---> 3. Applications  ---> <*> luci-app-podmaner..... Docker Manager interface for LuCI ----> save
 make V=99
 ```
 
 ## Screenshot / 截图
 - Containers
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/containers.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/containers.png)
 - Container Info
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/container_info.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/container_info.png)
 - Container Edit
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/container_edit.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/container_edit.png)
 - Container Stats
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/container_stats.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/container_stats.png)
 - Container Logs
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/container_logs.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/container_logs.png)
 - New Container
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/new_container.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/new_container.png)
 - Images
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/images.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/images.png)
 - Networks
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/networks.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/networks.png)
 - New Network
-![](https://raw.githubusercontent.com/lisaac/luci-app-dockerman/master/doc/new_network.png)
+![](https://raw.githubusercontent.com/lisaac/luci-app-podmaner/master/doc/new_network.png)
 
 ## Thanks / 谢致
 - Chinese translation by [401626436](https://www.right.com.cn/forum/space-uid-382335.html)
