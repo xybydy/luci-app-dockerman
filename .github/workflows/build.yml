@@ -59,6 +59,10 @@ jobs:
           fetch-depth: 0
         
       # - uses: hmarr/debug-action@v3
+      - name: Create artifact output dir
+        run: |
+          mkdir --parents '${{ runner.temp }}/artifacts'
+
       - name: Build Packages
         uses: openwrt/gh-action-sdk@main
         env:
