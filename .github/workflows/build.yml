@@ -49,7 +49,7 @@ jobs:
           # - x86_64
         sdk:
           - openwrt-24.10
-          - openwrt-23.05
+          # - openwrt-23.05
           # - SNAPSHOT
 
     steps:
