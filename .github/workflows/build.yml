@@ -65,7 +65,7 @@ jobs:
           FEEDNAME: packages_ci
           PACKAGES: luci-app-dockerman
           NO_REFRESH_CHECK: true
-          V: "sc"
+          V: "99"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
