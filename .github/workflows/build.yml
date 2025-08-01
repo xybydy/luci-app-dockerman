@@ -57,26 +57,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        
-      - name: Create artifact output dir
-        run: |
-              echo ""
-              mkdir feeds artifacts
-              cp -rf ./luci-app-podmaner ./feeds
-      # - uses: hmarr/debug-action@v3
-      - name: Print path
-        run: ls -lR ${{ github.workspace }}/
 
       - name: Build Packages
-        uses: openwrt/gh-action-sdk@main
+        uses: sbwml/openwrt-gh-action-sdk@go1.24
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
-          ARTIFACTS_DIR: ${{ github.workspace }}/artifacts
-          FEED_DIR: ${{ github.workspace }}/feeds
           PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
           V: cw
-          IGNORE_ERRORS: "n m y"
 
       - name: Print path
         run: ls -lR ${{ github.workspace }}/
