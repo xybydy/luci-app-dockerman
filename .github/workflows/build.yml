@@ -62,8 +62,8 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
-          # FEEDNAME: packages_ci
-          PACKAGES: luci-app-podmaner
+          FEEDNAME: packages_ci
+          # PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
           V: "cw"
           IGNORE_ERRORS: "n m y"
@@ -74,11 +74,11 @@ jobs:
         with:
           name: ${{ matrix.arch }}-${{ matrix.sdk }}
           path: |
-            # bin/packages/${{ matrix.arch }}/packages_ci/*.apk
-            # bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.apk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
-            bin/packages/${{ matrix.arch }}/*.apk
-            bin/packages/${{ matrix.arch }}/*.ipk
+            # bin/packages/${{ matrix.arch }}/*.apk
+            # bin/packages/${{ matrix.arch }}/*.ipk
 
       # - name: Create compress files
       #   continue-on-error: true
