@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build ${{ matrix.arch }}-${{ matrix.sdk }}
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
     strategy:
       fail-fast: false
       matrix:
@@ -62,7 +63,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           #FEEDNAME: packages_ci
-          PACKAGES: applications/luci-app-dockerman
+          # PACKAGES: luci-app-dockerman
           NO_REFRESH_CHECK: true
           V: "sc"
 
