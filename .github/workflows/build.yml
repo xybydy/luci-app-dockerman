@@ -65,7 +65,7 @@ jobs:
           # FEEDNAME: packages_ci
           PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
-          V: "99"
+          V: "w"
           IGNORE_ERRORS: "n m y"
 
 
