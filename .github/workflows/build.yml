@@ -66,6 +66,8 @@ jobs:
           PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
           V: "99"
+          IGNORE_ERRORS: "n m y"
+
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
