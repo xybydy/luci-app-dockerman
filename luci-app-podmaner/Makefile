@@ -18,7 +18,7 @@ PKG_MAINTAINER:=lisaac <lisaac.cn@gmail.com> \
 
 
 PKG_NAME:=luci-app-podmaner
-PKG_VERSION:=0.5.26
+PKG_VERSION:=0.5.27
 PKG_RELEASE:=16
 
 include $(TOPDIR)/feeds/luci/luci.mk

@@ -58,9 +58,9 @@ jobs:
         with:
           fetch-depth: 0
         
-      - uses: hmarr/debug-action@v3
+      # - uses: hmarr/debug-action@v3
       - name: Build Packages
-        uses: openwrt/gh-action-sdk@main
+        uses: sbwml/openwrt-gh-action-sdk@go1.24
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
