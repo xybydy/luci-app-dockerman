@@ -62,7 +62,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           #FEEDNAME: packages_ci
-          PACKAGES: luci-app-dockerman
+          PACKAGES: applications/luci-app-dockerman
           NO_REFRESH_CHECK: true
           V: "sc"
 
