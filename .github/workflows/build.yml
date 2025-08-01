@@ -75,8 +75,8 @@ jobs:
             # bin/packages/${{ matrix.arch }}/packages_ci/*.apk
             # bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
-            bin/packages/${{ matrix.arch }}/packages_ci/*.apk
-            bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
+            bin/packages/${{ matrix.arch }}/*.apk
+            bin/packages/${{ matrix.arch }}/*.ipk
 
       # - name: Create compress files
       #   continue-on-error: true
