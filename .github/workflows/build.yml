@@ -58,15 +58,14 @@ jobs:
         with:
           fetch-depth: 0
         
-      # - uses: hmarr/debug-action@v3
-      - name: Print path
-        run: ls -lR ${{ github.workspace }}/
-
       - name: Create artifact output dir
         run: |
               echo ""
               mkdir feeds artifacts
               cp -rf ./luci-app-podmaner ./feeds
+      # - uses: hmarr/debug-action@v3
+      - name: Print path
+        run: ls -lR ${{ github.workspace }}/
 
       - name: Build Packages
         uses: openwrt/gh-action-sdk@main
