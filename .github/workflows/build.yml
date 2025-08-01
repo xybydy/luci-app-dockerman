@@ -64,7 +64,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
-          PACKAGES: luci-app-podmaner
+          # PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
           V: cw
           IGNORE_ERRORS: "n m y"
