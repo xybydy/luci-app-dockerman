@@ -68,9 +68,7 @@ jobs:
           V: "cw"
           IGNORE_ERRORS: "n m y"
           NO_DEFAULT_FEEDS: true
-
-      - name: Upload artifacts
-          
+        
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
