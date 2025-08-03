@@ -58,16 +58,6 @@ jobs:
         with:
           fetch-depth: 0
         
-      - name: Get Tag
-        id: get_tag
-        run: |
-          echo "tag=$(git describe --tags --exact-match || echo '')" >> $GITHUB_OUTPUT
-      - name: Check Tag
-        run: |
-          if [ -z "${{ steps.get_tag.outputs.tag }}" ]; then
-            echo "No tag found, skipping release steps."
-            exit 0
-          fi
       - name: Build Packages
         uses: openwrt/gh-action-sdk@main
         # uses: sbwml/openwrt-gh-action-sdk@go1.24
@@ -98,13 +88,14 @@ jobs:
       #   run: |
       #     tar -zcvf ${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz -C bin/packages/${{ matrix.arch }}/ packages_ci
 
-      - name: Upload packages
-        uses: ncipollo/release-action@v1
-        with:
-          name: ${{ github.ref_name }}
-          token: ${{ secrets.WRT_TOKEN }}
-          allowUpdates: true
-          replacesArtifacts: true
-          prerelease: false
-          artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.ipk"
-          # artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz"
+      # - name: Upload packages
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     name: ${{ github.ref_name }}
+      #     token: ${{ secrets.WRT_TOKEN }}
+      #     allowUpdates: true
+      #     replacesArtifacts: true
+      #     prerelease: false
+      #     artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.ipk"
+      #     # artifacts: "${{ matrix.sdk }}-${{ matrix.arch }}.tar.gz"
+
