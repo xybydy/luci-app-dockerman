@@ -9,13 +9,11 @@ PKG_LICENSE:=AGPL-3.0
 
 LUCI_TITLE:=LuCI Support for docker
 LUCI_DEPENDS:=@(aarch64||arm||x86_64) \
-	+luci-base \
 	+luci-compat \
 	+luci-lib-docker \
 	+luci-lib-ip \
 	+docker \
 	+dockerd \
-	+docker-compose \
 	+ttyd
 LUCI_PKGARCH:=all
 PKG_MAINTAINER:=lisaac <lisaac.cn@gmail.com>
