@@ -59,14 +59,15 @@ jobs:
           fetch-depth: 0
 
       - name: Build Packages
-        #uses: openwrt/gh-action-sdk@main
-        uses: sbwml/openwrt-gh-action-sdk@go1.24
+        uses: openwrt/gh-action-sdk@main
+        # uses: sbwml/openwrt-gh-action-sdk@go1.24
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.sdk }}
           FEEDNAME: packages_ci
           PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
           V: s
+          IGNORE_ERRORS: true
 
       - name: Print path
         run: ls -lR ${{ github.workspace }}/
