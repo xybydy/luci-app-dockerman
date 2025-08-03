@@ -65,7 +65,7 @@ jobs:
           FEEDNAME: packages_ci
           PACKAGES: luci-app-podmaner
           NO_REFRESH_CHECK: true
-          V: cw
+          V: s
 
       - name: Print path
         run: ls -lR ${{ github.workspace }}/
