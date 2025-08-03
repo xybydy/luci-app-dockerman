@@ -77,8 +77,8 @@ jobs:
         with:
           name: ${{ matrix.arch }}-${{ matrix.sdk }}
           path: |
-            bin/packages/${{ matrix.arch }}/*.apk
-            bin/packages/${{ matrix.arch }}/*.ipk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.apk
+            bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
             # bin/packages/${{ matrix.arch }}/*.apk
             # bin/packages/${{ matrix.arch }}/*.ipk
