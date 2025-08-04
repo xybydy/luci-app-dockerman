@@ -2,14 +2,15 @@ include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI Support for docker
 LUCI_DEPENDS:=@(aarch64||arm||x86_64) \
-	#+docker \
-	+dockerd \
-	+docker-compose \
-	+ttyd \
-	+luci-base \
-	+luci-compat \
-	+luci-lib-docker \
-	+luci-lib-ip
+	+docker \
+	#+dockerd \
+	#+docker-compose \
+	#+ttyd \
+	#+luci-base \
+	#+luci-compat \
+	#+luci-lib-docker \
+	#+luci-lib-ip \ 
+	#+cgroupfs-mount
 
 
 PKG_LICENSE:=AGPL-3.0
