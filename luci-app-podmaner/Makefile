@@ -2,14 +2,15 @@ include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI Support for docker
 LUCI_DEPENDS:=@(aarch64||arm||x86_64) \
-	+luci-base \
-	+luci-compat \
-	+luci-lib-docker \
-	+luci-lib-ip \
 	+docker \
 	+dockerd \
 	+docker-compose \
-	+ttyd
+	+ttyd \
+	+luci-base \
+	+luci-compat \
+	+luci-lib-docker \
+	+luci-lib-ip
+
 
 PKG_LICENSE:=AGPL-3.0
 PKG_MAINTAINER:=lisaac <lisaac.cn@gmail.com> \
@@ -17,6 +18,18 @@ PKG_MAINTAINER:=lisaac <lisaac.cn@gmail.com> \
 
 PKG_VERSION:=0.5.26
 PKG_RELEASE:=16
+
+
+define Build/Compile
+    $(call GoPackage/Build/Compile)
+endef
+
+define Package/docker/install
+    $(INSTALL_DIR) $(1)/usr/bin
+    $(INSTALL_BIN) $(PKG_BUILD_DIR)/build/docker $(1)/usr/bin/
+endef
+
+
 
 # define KernelPackage/video-gspca-stv06xx
 #   TITLE:=GSPCA STV06XX camera driver
