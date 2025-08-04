@@ -47,7 +47,7 @@ jobs:
           # - mipsel_74kc
           # - mipsel_mips32
           # - riscv64_riscv64
-          # - x86_64
+          - x86_64
         sdk:
           - openwrt-24.10
           # - openwrt-23.05
